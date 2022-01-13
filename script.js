@@ -21,7 +21,7 @@ function signOut() {
 gapi.auth2.init();
 
 if (auth2.isSignedIn.get()) {
-    var profile = googleUser.getBasicProfile();
+    var profile = auth2.currentUser.get().getBasicProfile();
     console.log('ID: ' + profile.getId());
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
