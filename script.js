@@ -4,6 +4,11 @@ function onSignIn(googleUser) {
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail());
+
+    document.getElementById("userImg").src = profile.getImageUrl();
+
+    document.querySelector(".name") = profile.getName();
+    document.querySelector(".email") = profile.getEmail();
 }
 
 function signOut() {
