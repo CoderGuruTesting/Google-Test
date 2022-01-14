@@ -45,10 +45,13 @@ import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.6.3/
 const database = firebase.database();
 
 function writeUserData(userId, name, email, imageUrl) {
-  const db = getDatabase();
-  set(ref(db, 'users/' + userId), {
-    username: name,
-    email: email,
-    profile_picture : imageUrl
-  });
+    firebase.database().ref('users/' + userId).set({
+        username: name,
+        email: email,
+        profile_picture : imageUrl
+    });
 }
+
+document.getElementById("dataTest").onclick = function() {
+    writeUserData("TESTID", "NAME", "example@gmail.com", "test.jpg");
+};
