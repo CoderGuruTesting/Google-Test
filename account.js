@@ -1,5 +1,14 @@
 checkIfLoggedIn();
 
+function checkIfLoggedIn() {
+    if (localStorage.getItem('myUserEntity') != null) {
+        var userEntity = {};
+        userEntity = JSON.parse(localStorage.getItem('myUserEntity'));
+
+        afterSignIn(userEntity);
+    }
+}
+
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
 
@@ -23,25 +32,16 @@ function onSignIn(googleUser) {
 document.getElementById("signoutLink").addEventListener("click", function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
+        localStorage.removeItem("myUserEntity");
+
         document.getElementById("userImg").src = "";
 
         document.querySelector(".name").innerHTML = "";
         document.querySelector(".email").innerHTML = "";
 
         document.getElementById("specialString").setAttribute("value", "");
-
-        localStorage.removeItem("myUserEntity");
     });
 });
-
-function checkIfLoggedIn() {
-    if (localStorage.getItem('myUserEntity') != null) {
-        var userEntity = {};
-        userEntity = JSON.parse(localStorage.getItem('myUserEntity'));
-
-        afterSignIn(userEntity);
-    }
-}
 
 function afterSignIn(userProfile) {
     var profile = userProfile;
