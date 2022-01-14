@@ -43,9 +43,13 @@ function afterSignIn() {
 
     var check = firebase.database().ref().orderByKey('users').equalto(profile.getId()).once("value", function (snapshot) {
         if (!snapshot.exists()) {
-            writeUserData(profile.getId(), profile.getName(), profile.getEmail(), profile.getImageUrl());s
+            writeUserData(profile.getId(), profile.getName(), profile.getEmail(), profile.getImageUrl());
         }
 
         document.getElementById("specialString").value = firebase.database().ref("users/" + profile.getId()).on("value", (snap) => { return snap.val() });
+    });
+
+    document.getElementById("specialString").addEventListener("change", function() {
+        setSpecialString(profile.getId(), document.getElementById("specialString").value);
     });
 }
