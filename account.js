@@ -40,7 +40,7 @@ if (auth2.isSignedIn.get()) {
     }
 }
 
-import { getDatabase, ref, set } from "/firebase/database";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
 
 const database = getDatabase(app);
 
