@@ -15,7 +15,7 @@ function onSignIn(googleUser) {
     afterSignIn();
 }
 
-function signOut() {
+document.getElementById("signoutLink").addEventListener("click", function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
         document.getElementById("userImg").src = "";
@@ -23,7 +23,7 @@ function signOut() {
         document.querySelector(".name").innerHTML = "";
         document.querySelector(".email").innerHTML = "";
     });
-}
+});
 
 // if (auth2.isSignedIn.get()) {
 //     var profile = auth2.currentUser.get().getBasicProfile();
