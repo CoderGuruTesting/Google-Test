@@ -9,7 +9,7 @@
         <meta name="google-signin-client_id" content="796393754460-7gls25c75o9p8l8c3e074dp0s5h1pqhs.apps.googleusercontent.com">
         <link rel='stylesheet' href='style.css'>
         <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.15.1/css/all.css' integrity='sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp' crossorigin='anonymous'>
-        <script src="https://apis.google.com/js/platform.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
     </head>
     <body>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
@@ -21,7 +21,8 @@
         <div class="name"></div>
         <div class="email"></div>
 
-        <button id = 'dataTest'>Write Data</button>
+        <!-- <button id = 'dataTest'>Write Data</button> -->
+        <input type = "text" id = "specialString">
     
         <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>

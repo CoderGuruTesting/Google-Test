@@ -15,6 +15,13 @@ function writeUserData(userId, name, email, imageUrl) {
     firebase.database().ref('users/' + userId).set({
         username: name,
         email: email,
-        profile_picture: imageUrl
+        profile_picture: imageUrl,
+        userString: "new user string"
+    });
+}
+
+function setSpecialString(userId, specialString) {
+    firebase.database().ref('users/' + userId).update({
+        userString: specialString
     });
 }
