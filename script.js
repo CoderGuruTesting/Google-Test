@@ -1,37 +1,24 @@
-function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId());
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail());
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { getDatabase, ref, set } from "firebase/database";
 
-    document.getElementById("userImg").src = profile.getImageUrl();
+const firebaseConfig = {
+    apiKey: "AIzaSyDGyliCvD8UjUOAphjguLLuH55E-Y4r9Uo",
+    authDomain: "turnkey-agility-338113.firebaseapp.com",
+    databaseURL: "https://turnkey-agility-338113-default-rtdb.firebaseio.com",
+    projectId: "turnkey-agility-338113",
+    storageBucket: "turnkey-agility-338113.appspot.com",
+    messagingSenderId: "796393754460",
+    appId: "1:796393754460:web:ab34cf0f23a5bda3acbb99",
+    measurementId: "G-R75G7P7N72"
+};
 
-    document.querySelector(".name").innerHTML = profile.getName();
-    document.querySelector(".email").innerHTML = profile.getEmail();
-}
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-        document.getElementById("userImg").src = "";
-
-        document.querySelector(".name").innerHTML = "";
-        document.querySelector(".email").innerHTML = "";
-    });
-}
-
-gapi.auth2.init();
-
-if (auth2.isSignedIn.get()) {
-    var profile = auth2.currentUser.get().getBasicProfile();
-    console.log('ID: ' + profile.getId());
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail());
-
-    document.getElementById("userImg").src = profile.getImageUrl();
-
-    document.querySelector(".name").innerHTML = profile.getName();
-    document.querySelector(".email").innerHTML = profile.getEmail();
+async function getCities(db) {
+  const citiesCol = collection(db, 'cities');
+  const citySnapshot = await getDocs(citiesCol);
+  const cityList = citySnapshot.docs.map(doc => doc.data());
+  return cityList;
 }
