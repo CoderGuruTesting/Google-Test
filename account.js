@@ -42,7 +42,7 @@ function signOut() {
 
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
 
-const database = getDatabase(app);
+const database = firebase.database();
 
 function writeUserData(userId, name, email, imageUrl) {
   const db = getDatabase();
