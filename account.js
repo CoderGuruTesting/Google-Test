@@ -47,7 +47,7 @@ function afterSignIn(userProfile) {
     var profile = userProfile;
 
     var check = firebase.database().ref('users').orderByKey().equalTo(profile.id).once("value", function (snapshot) {
-        if (!snapshot.exists()) {
+        if (snapshot.exists() == false) {
             writeUserData(profile.id, profile.name, profile.email, profile.profile_picture);
         }
 
