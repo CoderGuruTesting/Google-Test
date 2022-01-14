@@ -49,7 +49,7 @@ function afterSignIn(userProfile) {
         let userSpecialString;
 
         firebase.database().ref("users/" + profile.getId()).on("value", (snap) => {
-           userSpecialString = snap.val();
+           userSpecialString = snap.val().userString;
         });
 
         document.getElementById("specialString").value = userSpecialString;
