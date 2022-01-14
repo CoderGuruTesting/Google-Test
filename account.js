@@ -8,11 +8,7 @@ function onSignIn(googleUser) {
     document.querySelector(".name").innerHTML = profile.getName();
     document.querySelector(".email").innerHTML = profile.getEmail();
 
-    var myUserEntity = {};
-    myUserEntity.Id = profile.getId();
-    myUserEntity.Name = profile.getName();
-
-    localStorage.setItem('myUserEntity', JSON.stringify(myUserEntity));
+    localStorage.setItem('myUserEntity', JSON.stringify(profile));
 
     afterSignIn(googleUser.getBasicProfile());
 }
