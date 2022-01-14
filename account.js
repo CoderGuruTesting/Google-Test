@@ -42,15 +42,14 @@ function afterSignIn(userProfile) {
             writeUserData(profile.getId(), profile.getName(), profile.getEmail(), profile.getImageUrl());
         }
 
-        let userData;
+        let userData, userSpecialString;
 
         firebase.database().ref("users/" + profile.getId()).on("value", (snap) => {
            userData = snap.val();
-           console.log(userData);
-           console.log(userData.userString);
+           userSpecialString = userData.userString;
         });
 
-        document.getElementById("specialString").value = userData.userString;
+        document.getElementById("specialString").value = userSpecialString;
     });
 
     document.getElementById("specialString").addEventListener("change", function() {
