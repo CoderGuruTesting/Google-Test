@@ -1,4 +1,4 @@
-gapi.auth2.init();
+// gapi.auth2.init();
 
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
