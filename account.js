@@ -17,7 +17,7 @@ function onSignIn(googleUser) {
 
     localStorage.setItem('myUserEntity', JSON.stringify(userEntity));
 
-    afterSignIn(googleUser.getBasicProfile());
+    afterSignIn(userEntity);
 }
 
 document.getElementById("signoutLink").addEventListener("click", function signOut() {
