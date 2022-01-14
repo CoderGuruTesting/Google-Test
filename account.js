@@ -8,7 +8,13 @@ function onSignIn(googleUser) {
     document.querySelector(".name").innerHTML = profile.getName();
     document.querySelector(".email").innerHTML = profile.getEmail();
 
-    localStorage.setItem('myUserEntity', JSON.stringify(profile));
+    var userEntity = {
+        username: profile.getName(),
+        email: profile.getEmail(),
+        profile_picture: profile.getImageUrl(),
+    };
+
+    localStorage.setItem('myUserEntity', JSON.stringify(userEntity));
 
     afterSignIn(googleUser.getBasicProfile());
 }
