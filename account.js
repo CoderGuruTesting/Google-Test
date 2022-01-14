@@ -47,9 +47,9 @@ function afterSignIn(userProfile) {
         firebase.database().ref("users/" + profile.getId()).on("value", (snap) => {
            userData = snap.val();
            userSpecialString = userData.userString;
-        });
 
-        document.getElementById("specialString").value = userSpecialString;
+           document.getElementById("specialString").setAttribute("value",  userSpecialString);
+        });
     });
 
     document.getElementById("specialString").addEventListener("change", function() {
