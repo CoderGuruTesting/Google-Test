@@ -40,13 +40,6 @@ function signOut() {
 //     }
 // }
 
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-import {
-    getAnalytics
-} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-analytics.js";
-
 const firebaseConfig = {
     apiKey: "AIzaSyDGyliCvD8UjUOAphjguLLuH55E-Y4r9Uo",
     authDomain: "turnkey-agility-338113.firebaseapp.com",
@@ -58,8 +51,7 @@ const firebaseConfig = {
     measurementId: "G-R75G7P7N72"
 };
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+firebase.initializeApp(firebaseConfig);
 
 function writeUserData(userId, name, email, imageUrl) {
     firebase.database().ref('users/' + userId).set({
