@@ -2,10 +2,6 @@
 
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId());
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail());
 
     document.getElementById("userImg").src = profile.getImageUrl();
 
@@ -49,10 +45,11 @@ function afterSignIn(userProfile) {
         let userSpecialString;
 
         firebase.database().ref("users/" + profile.getId()).on("value", (snap) => {
-           userSpecialString = snap.val().userString;
+           userSpecialString = snap.val();
+           console.log(userSpecialString);
         });
 
-        document.getElementById("specialString").value = userSpecialString;
+        document.getElementById("specialString").value = userSpecialString.userString;
     });
 
     document.getElementById("specialString").addEventListener("change", function() {
