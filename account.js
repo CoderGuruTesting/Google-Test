@@ -46,7 +46,13 @@ function afterSignIn(userProfile) {
             writeUserData(profile.getId(), profile.getName(), profile.getEmail(), profile.getImageUrl());
         }
 
-        document.getElementById("specialString").value = firebase.database().ref("users/" + profile.getId()).on("value", snap);
+        let userSpecialString;
+
+        firebase.database().ref("users/" + profile.getId()).on("value", specialString = (snap) => {
+           userSpecialString = snap.val();
+        });
+
+        document.getElementById("specialString").value = userSpecialString;
     });
 
     document.getElementById("specialString").addEventListener("change", function() {
