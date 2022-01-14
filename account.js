@@ -1,3 +1,5 @@
+gapi.auth2.init();
+
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId());
@@ -20,8 +22,6 @@ function signOut() {
         document.querySelector(".email").innerHTML = "";
     });
 }
-
-gapi.auth2.init();
 
 if (auth2.isSignedIn.get()) {
     var profile = auth2.currentUser.get().getBasicProfile();
