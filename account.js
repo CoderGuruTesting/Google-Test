@@ -9,6 +9,7 @@ function onSignIn(googleUser) {
     document.querySelector(".email").innerHTML = profile.getEmail();
 
     var userEntity = {
+        id: profile.getId(),
         username: profile.getName(),
         email: profile.getEmail(),
         profile_picture: profile.getImageUrl(),
@@ -45,14 +46,14 @@ function checkIfLoggedIn() {
 function afterSignIn(userProfile) {
     var profile = userProfile;
 
-    var check = firebase.database().ref('users').orderByKey().equalTo(profile.getId()).once("value", function (snapshot) {
+    var check = firebase.database().ref('users').orderByKey().equalTo(profile.id).once("value", function (snapshot) {
         if (!snapshot.exists()) {
-            writeUserData(profile.getId(), profile.getName(), profile.getEmail(), profile.getImageUrl());
+            writeUserData(profile.id, profile.name, profile.email, profile.profile_picture);
         }
 
         let userData, userSpecialString;
 
-        firebase.database().ref("users/" + profile.getId()).on("value", (snap) => {
+        firebase.database().ref("users/" + profile.id).on("value", (snap) => {
             userData = snap.val();
             userSpecialString = userData.userString;
 
@@ -61,6 +62,6 @@ function afterSignIn(userProfile) {
     });
 
     document.getElementById("specialString").addEventListener("change", function () {
-        setSpecialString(profile.getId(), document.getElementById("specialString").value);
+        setSpecialString(profile.id, document.getElementById("specialString").value);
     });
 }
