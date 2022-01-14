@@ -1,4 +1,4 @@
-// gapi.auth2.init();
+gapi.auth2.init();
 
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
@@ -65,7 +65,7 @@ document.getElementById("dataTest").onclick = function () {
     if(auth2.isSignedIn.get()) {
         var profile = auth2.currentUser.get().getBasicProfile();
 
-        writeUserData(profile.getId(), profile.getName(), profile.getEmail(), profile.getImageUrl());
+        writeUserData(profile.getId(), profile.getName(), profile.getEmail(), profile.getImageUrl);
     } else {
         alert("Please Log In");
     }
