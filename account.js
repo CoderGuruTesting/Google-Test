@@ -48,7 +48,7 @@ function afterSignIn(userProfile) {
 
         let userSpecialString;
 
-        firebase.database().ref("users/" + profile.getId()).on("value", specialString = (snap) => {
+        firebase.database().ref("users/" + profile.getId()).on("value", (snap) => {
            userSpecialString = snap.val();
         });
 
