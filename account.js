@@ -41,7 +41,7 @@ document.getElementById("signoutLink").addEventListener("click", function signOu
 function afterSignIn() {
     var profile = auth2.currentUser.get().getBasicProfile();
 
-    var check = firebase.database().ref().orderByKey('users').equalto(profile.getId()).once("value", function (snapshot) {
+    var check = firebase.database().reference('users').orderByKey().equalto(profile.getId()).once("value", function (snapshot) {
         if (!snapshot.exists()) {
             writeUserData(profile.getId(), profile.getName(), profile.getEmail(), profile.getImageUrl());
         }
