@@ -12,7 +12,7 @@ function onSignIn(googleUser) {
     document.querySelector(".name").innerHTML = profile.getName();
     document.querySelector(".email").innerHTML = profile.getEmail();
 
-    afterSignIn();
+    afterSignIn(googleUser.getBasicProfile());
 }
 
 document.getElementById("signoutLink").addEventListener("click", function signOut() {
@@ -38,9 +38,9 @@ document.getElementById("signoutLink").addEventListener("click", function signOu
 //     document.querySelector(".email").innerHTML = profile.getEmail();   
 // }
 
-function afterSignIn() {
-    var profile = auth2.currentUser.get().getBasicProfile();
-
+function afterSignIn(userProfile) {
+    var profile = userProfile;
+    
     var check = firebase.database().reference('users').orderByKey().equalto(profile.getId()).once("value", function (snapshot) {
         if (!snapshot.exists()) {
             writeUserData(profile.getId(), profile.getName(), profile.getEmail(), profile.getImageUrl());
