@@ -47,18 +47,20 @@ function afterSignIn(userProfile) {
     var profile = userProfile;
 
     var check = firebase.database().ref('users').orderByKey().equalTo(profile.id).once("value", function (snapshot) {
-        if (snapshot.exists() == false) {
+        if (snapshot.exists()) {
+            let userData, userSpecialString;
+
+            firebase.database().ref("users/" + profile.id).on("value", (snap) => {
+                userData = snap.val();
+                userSpecialString = userData.userString;
+
+                document.getElementById("specialString").setAttribute("value", userSpecialString);
+            });
+        } else {
             writeUserData(profile.id, profile.name, profile.email, profile.profile_picture);
+
+            document.getElementById("specialString").setAttribute("value", "new user string");
         }
-
-        let userData, userSpecialString;
-
-        firebase.database().ref("users/" + profile.id).on("value", (snap) => {
-            userData = snap.val();
-            userSpecialString = userData.userString;
-
-            document.getElementById("specialString").setAttribute("value", userSpecialString);
-        });
     });
 
     document.getElementById("specialString").addEventListener("change", function () {
