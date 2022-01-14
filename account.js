@@ -1,4 +1,4 @@
-// gapi.auth2.init();
+checkIfLoggedIn();
 
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
@@ -7,6 +7,12 @@ function onSignIn(googleUser) {
 
     document.querySelector(".name").innerHTML = profile.getName();
     document.querySelector(".email").innerHTML = profile.getEmail();
+
+    var myUserEntity = {};
+    myUserEntity.Id = profile.getId();
+    myUserEntity.Name = profile.getName();
+
+    localStorage.setItem('myUserEntity', JSON.stringify(myUserEntity));
 
     afterSignIn(googleUser.getBasicProfile());
 }
@@ -19,22 +25,20 @@ document.getElementById("signoutLink").addEventListener("click", function signOu
         document.querySelector(".name").innerHTML = "";
         document.querySelector(".email").innerHTML = "";
 
-        document.getElementById("specialString").setAttribute("value",  "");
+        document.getElementById("specialString").setAttribute("value", "");
+
+        localStorage.removeItem("myUserEntity");
     });
 });
 
-// if (auth2.isSignedIn.get()) {
-//     var profile = auth2.currentUser.get().getBasicProfile();
-//     console.log('ID: ' + profile.getId());
-//     console.log('Name: ' + profile.getName());
-//     console.log('Image URL: ' + profile.getImageUrl());
-//     console.log('Email: ' + profile.getEmail());
+function checkIfLoggedIn() {
+    if (localStorage.getItem('myUserEntity') != null) {
+        var userEntity = {};
+        userEntity = JSON.parse(localStorage.getItem('myUserEntity'));
 
-//     document.getElementById("userImg").src = profile.getImageUrl();
-
-//     document.querySelector(".name").innerHTML = profile.getName();
-//     document.querySelector(".email").innerHTML = profile.getEmail();   
-// }
+        afterSignIn(userEntity);
+    }
+}
 
 function afterSignIn(userProfile) {
     var profile = userProfile;
@@ -47,14 +51,14 @@ function afterSignIn(userProfile) {
         let userData, userSpecialString;
 
         firebase.database().ref("users/" + profile.getId()).on("value", (snap) => {
-           userData = snap.val();
-           userSpecialString = userData.userString;
+            userData = snap.val();
+            userSpecialString = userData.userString;
 
-           document.getElementById("specialString").setAttribute("value",  userSpecialString);
+            document.getElementById("specialString").setAttribute("value", userSpecialString);
         });
     });
 
-    document.getElementById("specialString").addEventListener("change", function() {
+    document.getElementById("specialString").addEventListener("change", function () {
         setSpecialString(profile.getId(), document.getElementById("specialString").value);
     });
 }
