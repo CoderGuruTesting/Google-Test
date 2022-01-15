@@ -49,24 +49,35 @@ function afterSignIn(userProfile) {
     console.log(googleProfile);
     console.log(googleProfile.id);
 
-    var check = firebase.database().ref('users').orderByKey().equalTo(googleProfile.id).once("value", function (snapshot) {
-        console.log(snapshot)
-        if (snapshot.exists()) {
-            let userData, userSpecialString;
+    writeUserData(googleProfile.id, googleProfile.name, googleProfile.email, googleProfile.profile_picture);
 
-            firebase.database().ref("users/" + googleProfile.id).on("value", (snap) => {
-                userData = snap.val();
-                userSpecialString = userData.userString;
+    let userData, userSpecialString;
 
-                document.getElementById("specialString").setAttribute("value", userSpecialString);
-            });
-        } else {
-            console.log(snapshot.exists())
-            writeUserData(googleProfile.id, googleProfile.name, googleProfile.email, googleProfile.profile_picture);
+    firebase.database().ref("users/" + googleProfile.id).on("value", (snap) => {
+        userData = snap.val();
+        userSpecialString = userData.userString;
 
-            document.getElementById("specialString").setAttribute("value", "new user string");
-        }
+        document.getElementById("specialString").setAttribute("value", userSpecialString);
     });
+
+    // var check = firebase.database().ref('users').orderByKey().equalTo(googleProfile.id).once("value", function (snapshot) {
+    //     console.log(snapshot)
+    //     if (snapshot.exists()) {
+    //         let userData, userSpecialString;
+
+    //         firebase.database().ref("users/" + googleProfile.id).on("value", (snap) => {
+    //             userData = snap.val();
+    //             userSpecialString = userData.userString;
+
+    //             document.getElementById("specialString").setAttribute("value", userSpecialString);
+    //         });
+    //     } else {
+    //         console.log(snapshot.exists())
+    //         writeUserData(googleProfile.id, googleProfile.name, googleProfile.email, googleProfile.profile_picture);
+
+    //         document.getElementById("specialString").setAttribute("value", "new user string");
+    //     }
+    // });
 
     document.getElementById("specialString").addEventListener("change", function () {
         setSpecialString(googleProfile.id, document.getElementById("specialString").value);
