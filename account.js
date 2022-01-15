@@ -46,6 +46,8 @@ document.getElementById("signoutLink").addEventListener("click", function signOu
 
 function afterSignIn(userProfile) {
     var googleProfile = userProfile;
+    console.log(googleProfile);
+    console.log(googleProfile.id);
 
     var check = firebase.database().ref('users').orderByKey().equalTo(googleProfile.id).once("value", function (snapshot) {
         if (snapshot.exists()) {
