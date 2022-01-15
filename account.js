@@ -49,7 +49,13 @@ function afterSignIn(userProfile) {
     console.log(googleProfile);
     console.log(googleProfile.id);
 
-    writeUserData(googleProfile.id, googleProfile.name, googleProfile.email, googleProfile.profile_picture);
+    var googleId, userName, userEmail, userPicture;
+    googleId = googleProfile.id;
+    userName = googleProfile.name;
+    userEmail = googleProfile.email;
+    userPicture = googleProfile.profile_picture;
+
+    writeUserData(googleId, userName, userEmail, userPicture);
 
     let userData, userSpecialString;
 
