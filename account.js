@@ -49,7 +49,7 @@ function afterSignIn(userProfile) {
 
     var googleId, userName, userEmail, userPicture;
     googleId = googleProfile.id;
-    userName = googleProfile.name;
+    userName = googleProfile.username;
     userEmail = googleProfile.email;
     userPicture = googleProfile.profile_picture;
 
