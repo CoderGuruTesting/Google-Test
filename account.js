@@ -1,14 +1,14 @@
-checkIfLoggedIn();
+// checkIfLoggedIn();
 
-function checkIfLoggedIn() {
-    if (localStorage.getItem('myUserEntity') != null) {
-        var userEntity = {};
-        userEntity = JSON.parse(localStorage.getItem('myUserEntity'));
-        console.log(userEntity);
+// function checkIfLoggedIn() {
+//     if (localStorage.getItem('myUserEntity') != null) {
+//         var userEntity = {};
+//         userEntity = JSON.parse(localStorage.getItem('myUserEntity'));
+//         console.log(userEntity);
 
-        afterSignIn(userEntity);
-    }
-}
+//         afterSignIn(userEntity);
+//     }
+// }
 
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
