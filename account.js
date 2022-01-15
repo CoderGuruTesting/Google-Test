@@ -4,6 +4,7 @@ function checkIfLoggedIn() {
     if (localStorage.getItem('myUserEntity') != null) {
         var userEntity = {};
         userEntity = JSON.parse(localStorage.getItem('myUserEntity'));
+        console.log(userEntity);
 
         afterSignIn(userEntity);
     }
@@ -44,19 +45,20 @@ document.getElementById("signoutLink").addEventListener("click", function signOu
 });
 
 function afterSignIn(userProfile) {
+    var googleProfile = userProfile;
 
-    var check = firebase.database().ref('users').orderByKey().equalTo(userProfile.id).once("value", function (snapshot) {
+    var check = firebase.database().ref('users').orderByKey().equalTo(googleProfile.id).once("value", function (snapshot) {
         if (snapshot.exists()) {
             let userData, userSpecialString;
 
-            firebase.database().ref("users/" + userProfile.id).on("value", (snap) => {
+            firebase.database().ref("users/" + googleProfile.id).on("value", (snap) => {
                 userData = snap.val();
                 userSpecialString = userData.userString;
 
                 document.getElementById("specialString").setAttribute("value", userSpecialString);
             });
         } else {
-            writeUserData(userProfile.id, userProfile.name, userProfile.email, userProfile.profile_picture);
+            writeUserData(googleProfile.id, googleProfile.name, googleProfile.email, googleProfile.profile_picture);
 
             document.getElementById("specialString").setAttribute("value", "new user string");
         }
