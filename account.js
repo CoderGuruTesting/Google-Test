@@ -67,6 +67,6 @@ function afterSignIn(userProfile) {
     });
 
     document.getElementById("specialString").addEventListener("change", function () {
-        setSpecialString(profile.id, document.getElementById("specialString").value);
+        setSpecialString(googleProfile.id, document.getElementById("specialString").value);
     });
 }
