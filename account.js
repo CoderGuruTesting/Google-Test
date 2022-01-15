@@ -46,14 +46,17 @@ document.getElementById("signoutLink").addEventListener("click", function signOu
 
 function afterSignIn(userProfile) {
     var googleProfile = userProfile;
-    console.log(googleProfile);
-    console.log(googleProfile.id);
 
     var googleId, userName, userEmail, userPicture;
     googleId = googleProfile.id;
     userName = googleProfile.name;
     userEmail = googleProfile.email;
     userPicture = googleProfile.profile_picture;
+
+    console.log(googleId);
+    console.log(userName);
+    console.log(userEmail);
+    console.log(userPicture);
 
     writeUserData(googleId, userName, userEmail, userPicture);
 
