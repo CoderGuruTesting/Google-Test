@@ -40,7 +40,7 @@ document.getElementById("signoutLink").addEventListener("click", function signOu
         document.querySelector(".name").innerHTML = "";
         document.querySelector(".email").innerHTML = "";
 
-        document.getElementById("specialString").setAttribute("value", "");
+        document.getElementById("specialString").value = "";
     });
 });
 
