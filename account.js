@@ -50,6 +50,7 @@ function afterSignIn(userProfile) {
     console.log(googleProfile.id);
 
     var check = firebase.database().ref('users').orderByKey().equalTo(googleProfile.id).once("value", function (snapshot) {
+        log(snapshot)
         if (snapshot.exists()) {
             let userData, userSpecialString;
 
@@ -60,6 +61,7 @@ function afterSignIn(userProfile) {
                 document.getElementById("specialString").setAttribute("value", userSpecialString);
             });
         } else {
+            log(snapshot.exists())
             writeUserData(googleProfile.id, googleProfile.name, googleProfile.email, googleProfile.profile_picture);
 
             document.getElementById("specialString").setAttribute("value", "new user string");
